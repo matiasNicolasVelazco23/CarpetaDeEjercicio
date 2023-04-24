@@ -91,7 +91,7 @@ def super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista, clave, modo, genero)
                     indice_max_min = indice_actual # Si la altura del héroe actual es mayor, se actualiza el índice del héroe con altura máxima
             elif modo == "mínimo": # Si se busca la altura mínima
                 if(lista[indice_actual][clave] < lista[indice_max_min][clave]): # Se compara la altura del héroe actual con la altura mínima actual
-                    indice_max_min = indice_actual # Si la altura del héroe actual es menor, se actualiza el índice del héroe con altura mínima
+                    indice_max_min = indice_actual # Si la altura del héroe actual es menor, se ac detualiza el índice del héroe con altura mínima
     return lista[indice_max_min] # Se devuelve el héroe con altura máxima o mínima según el índice almacenado en indice_max_min
 def promedio_altura_por_genero(lista, genero):
     """
@@ -119,8 +119,19 @@ def promedio_altura_por_genero(lista, genero):
     
     return promedio
 def informar_indicadores_anteriores():
-    mas_alto_nombre = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes, clave="altura", modo="máximo", genero="M")
-    print(mas_alto_nombre["nombre"])
+    mas_alto_masculino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes, clave="altura", modo="máximo", genero="M")
+    mas_alto_femenino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes, clave="altura", modo="máximo", genero="F")
+    mas_bajo_masculino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes, clave = "altura", modo= "mínimo", genero = "M")
+    mas_bajo_femenino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes, clave = "altura", modo= "mínimo", genero = "F")
+
+    print("El personaje más alto masculino es: {0}\n"
+          "El personaje más alto femenino es:{1}\n"
+          "El personaje más bajo masculino es:{2}\n"
+          "El personaje más bajo femenino es: {3}".format(
+                                                mas_alto_masculino["nombre"],
+                                                mas_alto_femenino["nombre"],
+                                                mas_bajo_masculino["nombre"],
+                                                mas_bajo_femenino["nombre"]))
 
 
 while True:
@@ -141,6 +152,7 @@ while True:
         case 4:
         # 4-Recorrer la lista y determinar cuál es el superhéroe más alto de género F 
             mas_alto_femenino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes, clave = "altura", modo= "máximo", genero = "F")
+            print(mas_alto_femenino)
         case 5:
         # 5-Recorrer la lista y determinar cuál es el superhéroe más bajo de género M
             mas_bajo_masculino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes, clave = "altura", modo= "mínimo", genero = "M")
@@ -148,6 +160,7 @@ while True:
         case 6:
         # 6-Recorrer la lista y determinar cuál es el superhéroe más bajo de género F
             mas_bajo_femenino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes, clave = "altura", modo= "mínimo", genero = "F")
+            print(mas_bajo_masculino)
         case 7:
         # 7-Promedio Masculinos
             promedio_masculinos= promedio_altura_por_genero(lista_personajes,genero="M")
@@ -155,8 +168,7 @@ while True:
         # 8-Promedio Masculinos
             promedio_femeninos= promedio_altura_por_genero(lista_personajes,genero="F")
         case 9:
-            hola = informar_indicadores_anteriores()
-            print(hola)
+            informar_indicadores_anteriores()
         case _:
             print("Opcion no valida")
         
