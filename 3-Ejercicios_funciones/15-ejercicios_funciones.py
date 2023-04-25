@@ -98,10 +98,8 @@ def calcular_peliculas_por_genero(lista_de_peliculas):
         texto_titulo = pelicula['titulo']
                 
         if texto_genero in dic_contador_generos:
-            auxiliar_lista = []
-            auxiliar_lista = dic_contador_generos[texto_genero]
-            auxiliar_lista.append(texto_titulo)
-            #dic_contador_generos[texto_genero].append(texto_titulo)
+
+            dic_contador_generos[texto_genero].append(texto_titulo)
         else:
             auxiliar_lista = []
             auxiliar_lista.append(texto_titulo)

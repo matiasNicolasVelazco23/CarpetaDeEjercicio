@@ -1,10 +1,10 @@
 # Desafío #01:
 # Agregar al código elaborado para cumplir el desafío #01 los siguientes puntos, utilizando un menú que permita acceder a cada uno de los puntos por separado.
-# 1-Recorrer la lista imprimiendo por consola el nombre de cada superhéroe de género M
-# 2-Recorrer la lista imprimiendo por consola el nombre de cada superhéroe de género F
-# 3-Recorrer la lista y determinar cuál es el superhéroe más alto de género M 
-# 4-Recorrer la lista y determinar cuál es el superhéroe más alto de género F 
-# 5-Recorrer la lista y determinar cuál es el superhéroe más bajo  de género M 
+# a-Recorrer la lista imprimiendo por consola el nombre de cada superhéroe de género M
+# b-Recorrer la lista imprimiendo por consola el nombre de cada superhéroe de género F
+# c-Recorrer la lista y determinar cuál es el superhéroe más alto de género M 
+# d-Recorrer la lista y determinar cuál es el superhéroe más alto de género F 
+# e-Recorrer la lista y determinar cuál es el superhéroe más bajo  de género M 
 # 6-Recorrer la lista y determinar cuál es el superhéroe más bajo  de género F 
 # 7-Recorrer la lista y determinar la altura promedio de los  superhéroes de género M
 # 8-Recorrer la lista y determinar la altura promedio de los  superhéroes de género F
@@ -15,68 +15,8 @@
 # 13-Listar todos los superhéroes agrupados por color de ojos.
 # 14-Listar todos los superhéroes agrupados por color de pelo.
 # 15-Listar todos los superhéroes agrupados por tipo de inteligencia
-lista_personajes =[
-  {
-    "nombre": "Rocket Raccoon",
-    "identidad": "Rocket Raccoon",
-    "empresa": "Marvel Comics",
-    "altura": "122.77",
-    "peso": "25.73",
-    "genero": "M",
-    "color_ojos": "Brown",
-    "color_pelo": "Brown",
-    "fuerza": "5",
-    "inteligencia": "average"
-  },
-  {
-    "nombre": "Wolverine",
-    "identidad": "Logan",
-    "empresa": "Marvel Comics",
-    "altura": "160.69999999999999",
-    "peso": "135.21000000000001",
-    "genero": "M",
-    "color_ojos": "Blue",
-    "color_pelo": "Black",
-    "fuerza": "35",
-    "inteligencia": "good"
-  },
-  {
-    "nombre": "Black Widow",
-    "identidad": "Natasha Romanoff",
-    "empresa": "Marvel Comics",
-    "altura": "170.78999999999999",
-    "peso": "59.340000000000003",
-    "genero": "F",
-    "color_ojos": "Green",
-    "color_pelo": "Auburn",
-    "fuerza": "15",
-    "inteligencia": "good"
-  },
-  {
-    "nombre": "Mystique",
-    "identidad": "Raven Darkholme",
-    "empresa": "Marvel Comics",
-    "altura": "178.65000000000001",
-    "peso": "54.960000000000001",
-    "genero": "F",
-    "color_ojos": "Yellow (without irises)",
-    "color_pelo": "Red / Orange",
-    "fuerza": "15",
-    "inteligencia": "good"
-  },
-  {
-    "nombre": "Spider-Man",
-    "identidad": "Peter Parker",
-    "empresa": "Marvel Comics",
-    "altura": "178.28",
-    "peso": "74.25",
-    "genero": "M",
-    "color_ojos": "Hazel",
-    "color_pelo": "Brown",
-    "fuerza": "55",
-    "inteligencia": "high"
-  }
-]
+from data_stark import lista_personajes
+
 
 def recorrer_lista_masculino_o_femenino(lista, genero):
     for personaje in lista: # Se itera sobre cada elemento (personaje) de la lista de personajes
@@ -132,132 +72,69 @@ def informar_indicadores_anteriores():
                                                 mas_alto_femenino["nombre"],
                                                 mas_bajo_masculino["nombre"],
                                                 mas_bajo_femenino["nombre"]))
-# 10-Determinar cuántos superhéroes tienen cada tipo de color de ojos.
-def calcular_heroes_por_color_de_ojos(lista):
 
-    dic_contador_color_ojos  = {} #
-    
+def contar_personajes_por_caracteristica(lista, clave):
+    # Crear un diccionario vacío para almacenar el contador de personajes por característica
+    dic_contador = {}
+    # Recorrer la lista de personajes
     for personaje in lista:
-        color_ojos = personaje["color_ojos"]
-
-        if color_ojos in dic_contador_color_ojos:
-            dic_contador_color_ojos[color_ojos] += 1
+        # Verificar si la clave existe en el personaje
+        if clave in personaje:
+            # Si la clave existe, obtener el valor de la característica
+            valor_caracteristica = personaje[clave]
         else:
-            dic_contador_color_ojos[color_ojos] = 1
-
-    return dic_contador_color_ojos
-
-def calcular_heroes_por_color_de_pelo(lista):
-    """
-    Devuelve un diccionario con el recuento de personajes por color de pelo.
-    """
-    # Creamos un diccionario vacío donde almacenaremos el recuento de personajes por color de pelo.
-    dic_contador_color_pelo = {}
-    
-    # Iteramos por cada personaje de la lista.
-    for personaje in lista:
-        # Extraemos el color de pelo del personaje.
-        color_pelo = personaje["color_pelo"]
-
-        # Si el color de pelo ya existe en el diccionario, incrementamos el contador correspondiente.
-        if color_pelo in dic_contador_color_pelo:
-            dic_contador_color_pelo[color_pelo] += 1
-        # Si el color de pelo no existe en el diccionario, lo agregamos con un contador de 1.
+            # Si la clave no existe, asignar "No tiene" como valor de la característica
+            valor_caracteristica = "No tiene"
+        # Verificar si el valor de la característica ya existe en el diccionario contador
+        if valor_caracteristica in dic_contador:
+            # Si el valor de la característica ya existe en el diccionario, aumentar el contador en 1
+            dic_contador[valor_caracteristica] += 1
         else:
-            dic_contador_color_pelo[color_pelo] = 1
+            # Si el valor de la característica no existe en el diccionario, crear una nueva entrada con el contador en 1
+            dic_contador[valor_caracteristica] = 1
+    # Devolver el diccionario contador con el número de personajes por cada valor de la característica
+    return dic_contador
 
-    # Devolvemos el diccionario con el recuento de personajes por color de pelo.
-    return dic_contador_color_pelo
-
-def calcular_heroes_por_inteligencia(lista):
-
-    dic_contador_inteligencia = {}
-
-    for personaje in lista:
-        if "tipo_inteligencia" in personaje:
-            tipo_inteligencia = personaje["tipo_inteligencia"]
-        else:
-            tipo_inteligencia = "No Tiene"
-
-        if tipo_inteligencia in dic_contador_inteligencia:
-            dic_contador_inteligencia[tipo_inteligencia] += 1
-        else:
-            dic_contador_inteligencia[tipo_inteligencia] = 1
-
-    return dic_contador_inteligencia
-
-def listar_por_color_ojos(lista_personajes):
-    # Crear un diccionario vacío para almacenar los personajes por color de ojos
-    personajes_por_color_ojos = {}
+def agrupar_personajes_por_atributo(lista_personajes, clave):
+    # Crear un diccionario vacío para almacenar los personajes por el atributo dado
+    personajes_por_atributo = {}
 
     # Recorrer la lista de personajes
     for personaje in lista_personajes:
-        # Obtener el color de ojos del personaje
-        color_ojos = personaje["color_ojos"]
+        # Obtener el valor del atributo del personaje
+        valor_atributo = personaje[clave]
 
-        # Verificar si el color de ojos ya está en el diccionario
-        if color_ojos in personajes_por_color_ojos:
-            # Si el color de ojos ya está en el diccionario, agregar el personaje a la lista correspondiente
-            personajes_por_color_ojos[color_ojos].append(personaje)
+        # Verificar si el valor del atributo ya está en el diccionario
+        if valor_atributo in personajes_por_atributo:
+            # Si el valor del atributo ya está en el diccionario, agregar el personaje a la lista correspondiente
+            personajes_por_atributo[valor_atributo].append(personaje)
         else:
-            # Si el color de ojos no está en el diccionario, crear una nueva lista con el personaje y agregarla al diccionario
-            personajes_por_color_ojos[color_ojos] = [personaje]
-
-def listar_por_color_pelo(lista_personajes):
-    # Crear un diccionario vacío para almacenar los personajes por color de pelo
-    personajes_por_color_pelo = {}
-
-    # Recorrer la lista de personajes
-    for personaje in lista_personajes:
-        # Obtener el color de pelo del personaje
-        color_pelo = personaje["color_pelo"]
-
-        # Verificar si el color de pelo ya está en el diccionario
-        if color_pelo in personajes_por_color_pelo:
-            # Si el color de pelo ya está en el diccionario, agregar el personaje a la lista correspondiente
-            personajes_por_color_pelo[color_pelo].append(personaje)
-        else:
-            # Si el color de pelo no está en el diccionario, crear una nueva lista con el personaje y agregarla al diccionario
-            personajes_por_color_pelo[color_pelo] = [personaje]
+            # Si el valor del atributo no está en el diccionario, crear una nueva lista con el personaje y agregarla al diccionario
+            personajes_por_atributo[valor_atributo] = [personaje]
 
     # Imprimir el diccionario
-    for color_pelo, personajes in personajes_por_color_pelo.items():
-        print(color_pelo + ":")
-        for personaje in personajes:
-            print("- " + personaje["nombre"])
-
-    # Imprimir el diccionario
-    for color_ojos, personajes in personajes_por_color_pelo.items():
-        print(color_ojos + ":")
-        for personaje in personajes:
-            print("- " + personaje["nombre"])
-
-def listar_por_tipo_inteligencia(lista_personajes):
-    # Crear un diccionario vacío para almacenar los personajes por tipo de inteligencia
-    personajes_por_tipo_inteligencia = {}
-
-    # Recorrer la lista de personajes
-    for personaje in lista_personajes:
-        # Obtener el tipo de inteligencia del personaje
-        tipo_inteligencia = personaje["inteligencia"]
-
-        # Verificar si el tipo de inteligencia ya está en el diccionario
-        if tipo_inteligencia in personajes_por_tipo_inteligencia:
-            # Si el tipo de inteligencia ya está en el diccionario, agregar el personaje a la lista correspondiente
-            personajes_por_tipo_inteligencia[tipo_inteligencia].append(personaje)
-        else:
-            # Si el tipo de inteligencia no está en el diccionario, crear una nueva lista con el personaje y agregarla al diccionario
-            personajes_por_tipo_inteligencia[tipo_inteligencia] = [personaje]
-
-    # Imprimir el diccionario
-    for tipo_inteligencia, personajes in personajes_por_tipo_inteligencia.items():
-        print(tipo_inteligencia + ":")
+    for valor_atributo, personajes in personajes_por_atributo.items():
+        print(valor_atributo + ":")
         for personaje in personajes:
             print("- " + personaje["nombre"])
 
 
 while True:
-    respuesta_str = input("\n 1 \n 2 \n 3 \n 4 \n 5 \n 6 \n 7 \n 8 \n 9 \n 10 \n 11 \n 12 \n 13 \n 14 \n 15\n")
+    respuesta_str = input("\nA)Recorrer la lista imprimiendo por consola el nombre de cada superhéroe de género M"
+                          "\nB)Recorrer la lista imprimiendo por consola el nombre de cada superhéroe de género F"
+                          "\nC)Recorrer la lista y determinar cuál es el superhéroe más alto de género M"
+                          "\nD)Recorrer la lista y determinar cuál es el superhéroe más alto de género F"
+                          "\nE)Recorrer la lista y determinar cuál es el superhéroe más bajo  de género M"
+                          "\nF)Recorrer la lista y determinar cuál es el superhéroe más bajo  de género F"
+                          "\nG)Recorrer la lista y determinar la altura promedio de los  superhéroes de género M"
+                          "\nH)Recorrer la lista y determinar la altura promedio de los  superhéroes de género F"
+                          "\nI)Informar cual es el Nombre del superhéroe asociado a cada uno de los indicadores anteriores (ítems 3 a 8)"
+                          "\nJ)Determinar cuántos superhéroes tienen cada tipo de color de ojos."
+                          "\nK)Determinar cuántos superhéroes tienen cada tipo de color de pelo."
+                          "\nL)Determinar cuántos superhéroes tienen cada tipo de inteligencia (En caso de no tener, Inicializarlo con ‘No Tiene’). "
+                          "\nM)Listar todos los superhéroes agrupados por color de ojos."
+                          "\nN)Listar todos los superhéroes agrupados por color de pelo."
+                          "\nO)Listar todos los superhéroes agrupados por tipo de inteligencia")
     #FALTA VALIDAR
     respuesta_int = int(respuesta_str)
     match(respuesta_int):
@@ -269,19 +146,23 @@ while True:
             recorrer_lista_masculino_o_femenino(lista_personajes,"F")
         case 3:
         # 3-Recorrer la lista y determinar cuál es el superhéroe más alto de género M 
-            mas_alto_masculino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes, clave = "altura", modo= "máximo", genero = "M")
+            mas_alto_masculino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes, 
+                                                                                  clave = "altura", modo= "máximo", genero = "M")
             print(mas_alto_masculino)
         case 4:
         # 4-Recorrer la lista y determinar cuál es el superhéroe más alto de género F 
-            mas_alto_femenino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes, clave = "altura", modo= "máximo", genero = "F")
+            mas_alto_femenino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes,
+                                                                                  clave = "altura", modo= "máximo", genero = "F")
             print(mas_alto_femenino)
         case 5:
         # 5-Recorrer la lista y determinar cuál es el superhéroe más bajo de género M
-            mas_bajo_masculino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes, clave = "altura", modo= "mínimo", genero = "M")
+            mas_bajo_masculino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes,
+                                                                                   clave = "altura", modo= "mínimo", genero = "M")
             print(mas_bajo_masculino)
         case 6:
         # 6-Recorrer la lista y determinar cuál es el superhéroe más bajo de género F
-            mas_bajo_femenino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes, clave = "altura", modo= "mínimo", genero = "F")
+            mas_bajo_femenino = super_heroe_mas_alto_o_bajo_masculino_o_femenino(lista_personajes,
+                                                                                  clave = "altura", modo= "mínimo", genero = "F")
             print(mas_bajo_masculino)
         case 7:
         # 7-Promedio Masculinos
@@ -292,22 +173,25 @@ while True:
         case 9:
             informar_indicadores_anteriores()
         case 10: 
-            color_de_ojos_cantidad=calcular_heroes_por_color_de_ojos(lista_personajes)
+            color_de_ojos_cantidad=contar_personajes_por_caracteristica(lista_personajes,clave = "color_ojos")
             print(color_de_ojos_cantidad)
         case 11:
-            color_de_pelo_cantidad=calcular_heroes_por_color_de_pelo(lista_personajes)
+            color_de_pelo_cantidad=contar_personajes_por_caracteristica(lista_personajes,clave = "color_pelo")
             print(color_de_pelo_cantidad)     
         case 12:
-            # 12-Determinar cuántos superhéroes tienen cada tipo de inteligencia (En caso de no tener, Inicializarlo con ‘No Tiene’). 
-            hereoes_inteligencia_cantidad=calcular_heroes_por_inteligencia(lista_personajes)
+            hereoes_inteligencia_cantidad=contar_personajes_por_caracteristica(lista_personajes,clave = "inteligencia")
             print(hereoes_inteligencia_cantidad)
         case 13:
-            listar_por_color_ojos(lista_personajes)
+            agrupar_personajes_por_atributo(lista_personajes, clave = "color_ojos")
         case 14:
-            listar_por_color_pelo(lista_personajes)
+            agrupar_personajes_por_atributo(lista_personajes, clave = "color_pelo")
         case 15:
-            listar_por_tipo_inteligencia(lista_personajes)
+            agrupar_personajes_por_atributo(lista_personajes, clave = "inteligencia")
         case _:
             print("Opcion no valida")
         
     input("\nPulse enter para continuar\n")
+
+    #hacer la función más general para los puntos 10 11 12 /  13 14 15
+ 
+    #Cambiar lo imprimido en el menú

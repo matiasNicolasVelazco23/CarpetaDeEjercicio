@@ -1,6 +1,18 @@
 lista_personajes =\
 [
   {
+    "nombre": "Howard the Duck",
+    "identidad": "Howard (Last name unrevealed)",
+    "empresa": "Marvel Comics",
+    "altura": "79.349999999999994",
+    "peso": "18.449999999999999",
+    "genero": "M",
+    "color_ojos": "Brown",
+    "color_pelo": "Yellow",
+    "fuerza": "2",
+    "inteligencia": ""
+  },
+  {
     "nombre": "Rocket Raccoon",
     "identidad": "Rocket Raccoon",
     "empresa": "Marvel Comics",
@@ -60,19 +72,6 @@ lista_personajes =\
     "fuerza": "55",
     "inteligencia": "high"
   },
-  {
-    "nombre": "Howard the Duck",
-    "identidad": "Howard (Last name unrevealed)",
-    "empresa": "Marvel Comics",
-    "altura": "79.349999999999994",
-    "peso": "18.449999999999999",
-    "genero": "M",
-    "color_ojos": "Brown",
-    "color_pelo": "Yellow",
-    "fuerza": "2",
-    "inteligencia": ""
-  },
-
   {
     "nombre": "Storm",
     "identidad": "Ororo Munroe",
