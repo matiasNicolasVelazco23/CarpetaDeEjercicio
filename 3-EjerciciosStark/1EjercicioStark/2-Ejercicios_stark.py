@@ -132,6 +132,128 @@ def informar_indicadores_anteriores():
                                                 mas_alto_femenino["nombre"],
                                                 mas_bajo_masculino["nombre"],
                                                 mas_bajo_femenino["nombre"]))
+# 10-Determinar cuántos superhéroes tienen cada tipo de color de ojos.
+def calcular_heroes_por_color_de_ojos(lista):
+
+    dic_contador_color_ojos  = {} #
+    
+    for personaje in lista:
+        color_ojos = personaje["color_ojos"]
+
+        if color_ojos in dic_contador_color_ojos:
+            dic_contador_color_ojos[color_ojos] += 1
+        else:
+            dic_contador_color_ojos[color_ojos] = 1
+
+    return dic_contador_color_ojos
+
+def calcular_heroes_por_color_de_pelo(lista):
+    """
+    Devuelve un diccionario con el recuento de personajes por color de pelo.
+    """
+    # Creamos un diccionario vacío donde almacenaremos el recuento de personajes por color de pelo.
+    dic_contador_color_pelo = {}
+    
+    # Iteramos por cada personaje de la lista.
+    for personaje in lista:
+        # Extraemos el color de pelo del personaje.
+        color_pelo = personaje["color_pelo"]
+
+        # Si el color de pelo ya existe en el diccionario, incrementamos el contador correspondiente.
+        if color_pelo in dic_contador_color_pelo:
+            dic_contador_color_pelo[color_pelo] += 1
+        # Si el color de pelo no existe en el diccionario, lo agregamos con un contador de 1.
+        else:
+            dic_contador_color_pelo[color_pelo] = 1
+
+    # Devolvemos el diccionario con el recuento de personajes por color de pelo.
+    return dic_contador_color_pelo
+
+def calcular_heroes_por_inteligencia(lista):
+
+    dic_contador_inteligencia = {}
+
+    for personaje in lista:
+        if "tipo_inteligencia" in personaje:
+            tipo_inteligencia = personaje["tipo_inteligencia"]
+        else:
+            tipo_inteligencia = "No Tiene"
+
+        if tipo_inteligencia in dic_contador_inteligencia:
+            dic_contador_inteligencia[tipo_inteligencia] += 1
+        else:
+            dic_contador_inteligencia[tipo_inteligencia] = 1
+
+    return dic_contador_inteligencia
+
+def listar_por_color_ojos(lista_personajes):
+    # Crear un diccionario vacío para almacenar los personajes por color de ojos
+    personajes_por_color_ojos = {}
+
+    # Recorrer la lista de personajes
+    for personaje in lista_personajes:
+        # Obtener el color de ojos del personaje
+        color_ojos = personaje["color_ojos"]
+
+        # Verificar si el color de ojos ya está en el diccionario
+        if color_ojos in personajes_por_color_ojos:
+            # Si el color de ojos ya está en el diccionario, agregar el personaje a la lista correspondiente
+            personajes_por_color_ojos[color_ojos].append(personaje)
+        else:
+            # Si el color de ojos no está en el diccionario, crear una nueva lista con el personaje y agregarla al diccionario
+            personajes_por_color_ojos[color_ojos] = [personaje]
+
+def listar_por_color_pelo(lista_personajes):
+    # Crear un diccionario vacío para almacenar los personajes por color de pelo
+    personajes_por_color_pelo = {}
+
+    # Recorrer la lista de personajes
+    for personaje in lista_personajes:
+        # Obtener el color de pelo del personaje
+        color_pelo = personaje["color_pelo"]
+
+        # Verificar si el color de pelo ya está en el diccionario
+        if color_pelo in personajes_por_color_pelo:
+            # Si el color de pelo ya está en el diccionario, agregar el personaje a la lista correspondiente
+            personajes_por_color_pelo[color_pelo].append(personaje)
+        else:
+            # Si el color de pelo no está en el diccionario, crear una nueva lista con el personaje y agregarla al diccionario
+            personajes_por_color_pelo[color_pelo] = [personaje]
+
+    # Imprimir el diccionario
+    for color_pelo, personajes in personajes_por_color_pelo.items():
+        print(color_pelo + ":")
+        for personaje in personajes:
+            print("- " + personaje["nombre"])
+
+    # Imprimir el diccionario
+    for color_ojos, personajes in personajes_por_color_pelo.items():
+        print(color_ojos + ":")
+        for personaje in personajes:
+            print("- " + personaje["nombre"])
+
+def listar_por_tipo_inteligencia(lista_personajes):
+    # Crear un diccionario vacío para almacenar los personajes por tipo de inteligencia
+    personajes_por_tipo_inteligencia = {}
+
+    # Recorrer la lista de personajes
+    for personaje in lista_personajes:
+        # Obtener el tipo de inteligencia del personaje
+        tipo_inteligencia = personaje["inteligencia"]
+
+        # Verificar si el tipo de inteligencia ya está en el diccionario
+        if tipo_inteligencia in personajes_por_tipo_inteligencia:
+            # Si el tipo de inteligencia ya está en el diccionario, agregar el personaje a la lista correspondiente
+            personajes_por_tipo_inteligencia[tipo_inteligencia].append(personaje)
+        else:
+            # Si el tipo de inteligencia no está en el diccionario, crear una nueva lista con el personaje y agregarla al diccionario
+            personajes_por_tipo_inteligencia[tipo_inteligencia] = [personaje]
+
+    # Imprimir el diccionario
+    for tipo_inteligencia, personajes in personajes_por_tipo_inteligencia.items():
+        print(tipo_inteligencia + ":")
+        for personaje in personajes:
+            print("- " + personaje["nombre"])
 
 
 while True:
@@ -169,6 +291,22 @@ while True:
             promedio_femeninos= promedio_altura_por_genero(lista_personajes,genero="F")
         case 9:
             informar_indicadores_anteriores()
+        case 10: 
+            color_de_ojos_cantidad=calcular_heroes_por_color_de_ojos(lista_personajes)
+            print(color_de_ojos_cantidad)
+        case 11:
+            color_de_pelo_cantidad=calcular_heroes_por_color_de_pelo(lista_personajes)
+            print(color_de_pelo_cantidad)     
+        case 12:
+            # 12-Determinar cuántos superhéroes tienen cada tipo de inteligencia (En caso de no tener, Inicializarlo con ‘No Tiene’). 
+            hereoes_inteligencia_cantidad=calcular_heroes_por_inteligencia(lista_personajes)
+            print(hereoes_inteligencia_cantidad)
+        case 13:
+            listar_por_color_ojos(lista_personajes)
+        case 14:
+            listar_por_color_pelo(lista_personajes)
+        case 15:
+            listar_por_tipo_inteligencia(lista_personajes)
         case _:
             print("Opcion no valida")
         
