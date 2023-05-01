@@ -103,6 +103,7 @@ def agrupar_personajes_por_atributo(lista_personajes, clave):
     for personaje in lista_personajes:
         # Obtener el valor del atributo del personaje
         valor_atributo = personaje[clave]
+        print(personaje)
 
         # Verificar si el valor del atributo ya está en el diccionario
         if valor_atributo in personajes_por_atributo:
@@ -134,7 +135,7 @@ while True:
                           "\nL)Determinar cuántos superhéroes tienen cada tipo de inteligencia (En caso de no tener, Inicializarlo con ‘No Tiene’). "
                           "\nM)Listar todos los superhéroes agrupados por color de ojos."
                           "\nN)Listar todos los superhéroes agrupados por color de pelo."
-                          "\nO)Listar todos los superhéroes agrupados por tipo de inteligencia")
+                          "\nO)Listar todos los superhéroes agrupados por tipo de inteligencia:\n")
     #FALTA VALIDAR
     respuesta_int = int(respuesta_str)
     match(respuesta_int):
@@ -195,3 +196,4 @@ while True:
     #hacer la función más general para los puntos 10 11 12 /  13 14 15
  
     #Cambiar lo imprimido en el menú
+
