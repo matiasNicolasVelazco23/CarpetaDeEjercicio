@@ -41,7 +41,6 @@ def mostrar_promedio():
             suma_alturas += altura
 
     promedio_alturas = suma_alturas / len(lista_personajes)
-    # Opción 6: Buscar el miembro más joven y el más viejo
     print("El promedio de altura de los miembros es {0} ".format(promedio_alturas))
 
 #Informar cual es el Nombre del superhéroe asociado a cada uno de los indicadores anteriores (MÁXIMO, MÍNIMO)
@@ -137,4 +136,4 @@ while True:
     else:
         print("Opción inválida. Intente de nuevo.")
 
-        
+#comentario llamar a las funciones en los ejercicios de informar.

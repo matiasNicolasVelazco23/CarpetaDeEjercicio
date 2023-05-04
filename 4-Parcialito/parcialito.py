@@ -1,30 +1,4 @@
 # GUIA EJERCICIOS BASICOS CON STRINGS
-
-
-# Escribir una función que tome un número de tarjeta de crédito como input, verificar que todos los caracteres sean numéricos y devolver los últimos cuatro dígitos y los primeros dígitos como asteriscos, por ejemplo: "**** **** **** 1234". 
-
-# Escribir una función que tome un correo electrónico y elimine cualquier carácter después del símbolo @, por ejemplo: "usuario@gmail.com" -> "usuario".
-
-# Escribir una función que tome una URL y devuelva solo el nombre de dominio, por ejemplo: "https://www.ejemplo.com.ar/pagina1" -> "ejemplo"..
-
-# Escribir una función que tome una cadena de texto y devuelva solo los caracteres alfabéticos, eliminando cualquier número o símbolo, por ejemplo: "H0l4, m4nd0!" -> "Hl, mnd.
-
-# Escribir una función que tome una cadena de texto y la convierta en un acrónimo, tomando la primera letra de cada palabra, por ejemplo: "Universidad Tecnológica Nacional Facultad Regional Avellaneda" -> "UTNFRA”.
-
-# Escribir una función que tome un número binario y lo convierta en una cadena de 8 bits, rellenando con ceros a la izquierda si es necesario, por ejemplo: "101" -> "00000101".
-
-
-# Escribir una función que tome una cadena de caracteres y reemplace todas las letras mayúsculas por letras minúsculas y todas las letras minúsculas por letras mayúsculas, por ejemplo: "HoLa" -> "hOlA"
-
-
-# Escribir una función que tome una cadena de caracteres y cuente la cantidad de dígitos que contiene, por ejemplo: "1234 Hola Mundo" -> contiene 4 dígitos.
-
-
-# Escribir una función que tome una lista de direcciones de correo electrónico y las una en una sola cadena separada por punto y coma, por ejemplo: ["juan@gmail.com", "maria@hotmail.com"] -> "juan@gmail.com;maria@hotmail.com".
-
-
-# Crear una función que reciba como parámetro un string y devuelva un diccionario donde cada clave es una palabra y cada valor es un entero que indica cuántas veces aparece esa palabra dentro del string.
-
 #1.Escribir una función que reciba un string y devuelva el mismo string todo en mayúsculas.
 
 def convertir_mayuscula(texto):
@@ -56,13 +30,17 @@ def cantidad_caracteres_string(texto):
 def cantidad_de_veces_un_string(texto_repetidas, caracter):
     contador_caracter = texto_repetidas.count(caracter)
     print(contador_caracter)
+    
 #6 Escribir una función que tome un string y un carácter y devuelva una lista con todas las palabras en el string que contienen ese carácter.
-
 def lista_palabras_un_caracter(cadena, caracter):
-    for valor in cadena:
-        for letra in valor:
-            if letra == caracter:
-                print(valor)
+    # Convertimos la lista en una cadena de texto separada por comas
+    cadena_texto = ",".join(cadena)
+    palabras = cadena_texto.split(",")  # Separamos la cadena en una lista de palabras
+    palabras_con_caracter = []
+    for palabra in palabras:
+        if palabra.count(caracter) > 0:  # Si la palabra tiene al menos una ocurrencia del caracter
+            palabras_con_caracter.append(palabra)  # Agregamos la palabra a la lista
+    return palabras_con_caracter
 
 #7 Escribir una función que tome un string y devuelva el mismo string con los espacios eliminados
 
@@ -112,7 +90,102 @@ def concatenar_palabras(lista_palabras):
         ultima_palabra = lista_palabras[-1]   # Obtiene la última palabra de la lista
         return "{0} y {1}".format(palabras_menos_ultima,ultima_palabra)  # Retorna todas las palabras concatenadas con comas y "y" antes de la última palabra
 
+#12 
+#Escribir una función que tome un número de tarjeta de crédito como input, 
+# verificar que todos los caracteres sean numéricos y devolver los últimos 
+# cuatro dígitos y los primeros dígitos como asteriscos, por ejemplo: 
+# "**** **** **** 1234". 
+def validar_tarjeta(texto):
+    lista = texto.split(" ")
+    flag_tarjeta_ok = True
+    var_texto = "ERROR"
+    for e in lista:
+        if (e.isdigit() == False):
+            flag_tarjeta_ok = False
+            break
+    if flag_tarjeta_ok and len(lista) == 4:
+        var_texto = "***** {0} {1} *****". format (lista[1], lista[2])
+    return var_texto
 
+# 13. Escribir una función que tome un correo electrónico y elimine cualquier carácter d
+# espués del símbolo @, por ejemplo: "usuario@gmail.com" -> "usuario".
+def eliminar_caracteres_despues_arroba(correo_electronico):
+    correosplit = correo_electronico.split("@")
+    return correosplit[0]
+
+# 14. Escribir una función que tome una URL y devuelva solo el nombre de dominio, 
+# por ejemplo: "https://www.ejemplo.com.ar/pagina1" -> "ejemplo"..
+def obtener_nombre_dominio(url):
+    partes_url = url.split('/')
+    nombre_dominio = partes_url[2].split('.')
+    return nombre_dominio[1]
+
+# 15.Escribir una función que tome una cadena de texto y devuelva solo los caracteres 
+# alfabéticos, eliminando cualquier número o símbolo, por ejemplo: "H0l4, m4nd0!" -> "Hl, mnd.
+def obtener_caracteres_alfabeticos(cadena):
+    caracteres_alfabeticos = ''
+    for caracter in cadena:
+        if caracter.isalpha():
+            caracteres_alfabeticos += caracter
+    return caracteres_alfabeticos
+#16 Escribir una función que tome una cadena de texto y la convierta en un acrónimo, 
+# tomando la primera letra de cada palabra, por ejemplo: "Universidad Tecnológica 
+# Nacional Facultad Regional Avellaneda" -> "UTNFRA”.
+def obtener_acronimo(cadena):
+    acronimo = ''  # creamos una variable vacía para almacenar el acrónimo
+    palabras = cadena.split()  # dividimos la cadena en palabras usando el espacio como separador y almacenamos el resultado en la variable "palabras"
+    for palabra in palabras:  # iteramos sobre cada palabra en la variable "palabras"
+        acronimo += palabra[0].upper()  # añadimos la primera letra de cada palabra al acrónimo, convirtiéndola a mayúscula
+    return acronimo  # retornamos el acrónimo generado
+
+#17 Escribir una función que tome un número binario y lo convierta en una cadena de 8 bits, rellenando con ceros a la izquierda si es necesario, por ejemplo: "101" -> "00000101".
+def convertir_a_8bits(numero_binario):
+    return numero_binario.zfill(8)
+
+#18 Escribir una función que tome una cadena de caracteres y reemplace todas 
+# las letras mayúsculas por letras minúsculas y todas las letras minúsculas por 
+# letras mayúsculas, por ejemplo: "HoLa" -> "hOlA
+def invertir_mayusculas_minusculas(cadena):
+    nueva_cadena = ""
+    for caracter in cadena:
+        if caracter.isupper():
+            nueva_cadena += caracter.lower()
+        elif caracter.islower():
+            nueva_cadena += caracter.upper()
+        else:
+            nueva_cadena += caracter
+    return nueva_cadena
+
+#19 Escribir una función que tome una cadena de caracteres y cuente la cantidad de dígitos que contiene, por ejemplo: "1234 Hola Mundo" -> contiene 4 dígitos.
+def contar_digitos(cadena):
+    contador = 0  # Inicializamos el contador de dígitos en 0
+    for caracter in cadena:  # Iteramos por cada caracter de la cadena
+        if caracter.isdigit():  # Si el caracter es un dígito
+            contador += 1  # Aumentamos el contador en 1
+    return contador  # Devolvemos el contador de dígitos encontrados
+
+
+#20 Escribir una función que tome una lista de direcciones de correo electrónico y las una 
+# en una sola cadena separada por punto y coma, por ejemplo: ["juan@gmail.com", "maria@hotmail.com"] 
+# -> "juan@gmail.com;maria@hotmail.com".
+def unir_emails(lista_emails):
+    # Con el método join unimos los elementos de la lista en una cadena separada por ";"
+    emails_unidos = ";".join(lista_emails)
+    return emails_unidos
+
+#21 Crear una función que reciba como parámetro un string y devuelva un diccionario
+#  donde cada clave es una palabra y cada valor es un entero que indica cuántas veces
+#  aparece esa palabra dentro del string.
+
+def cuenta_palabras(texto:str): # definimos una función llamada cuenta_palabras que recibe un parámetro de tipo string llamado texto
+    dic_contador = {} # creamos un diccionario vacío que se utilizará para almacenar la cantidad de veces que aparece cada palabra en el texto
+    lista_palabras = texto.split(" ") # dividimos el texto en palabras separadas por espacios y las almacenamos en una lista llamada lista_palabras
+    for palabra in lista_palabras: # iteramos por cada palabra de la lista_palabras
+        if palabra in dic_contador: # si la palabra ya se encuentra en el diccionario
+            dic_contador[palabra] = dic_contador[palabra] + 1 # aumentamos el contador de veces que aparece esa palabra en 1
+        else: # si la palabra no está en el diccionario
+            dic_contador[palabra] = 1 # la agregamos al diccionario con un valor de 1, indicando que apareció una vez en el texto
+    return dic_contador # devolvemos el diccionario que contiene las palabras y la cantidad de veces que aparecen en el texto
 
 #1
 texto1 = "hola"
@@ -156,7 +229,55 @@ lista_frutas= ["Manzanas","naranjas","bananas"]
 palabras_concatenadas=concatenar_palabras(lista_frutas)
 print(palabras_concatenadas)
 
+#12
+ingreso_tarjeta = input("Ingrese número de tarjeta")
+validar_tarjeta(ingreso_tarjeta)
+resultado_validar_tarjeta= validar_tarjeta(ingreso_tarjeta)
+print(resultado_validar_tarjeta)
 
+#13
+correo_electronico = "usuario@gmail.com"
+nombre_usuario = eliminar_caracteres_despues_arroba(correo_electronico)
+print(nombre_usuario)  # Output: usuario
 
+#14
+url = "https://www.ejemplo.com.ar/pagina1"
+nombre_dominio = obtener_nombre_dominio(url)
+print(nombre_dominio)  # Output: ejemplo
 
+#15
+cadena = "H0l4, m4nd0!"
+caracteres_alfabeticos = obtener_caracteres_alfabeticos(cadena)
+print(caracteres_alfabeticos)  # Output: Hl mnd
 
+#16
+cadena = "Universidad Tecnológica Nacional Facultad Regional Avellaneda"
+acronimo = obtener_acronimo(cadena)
+print(acronimo)  # Output: UTNFRA
+
+#17
+numero_binario = "101"
+numero_8bits = convertir_a_8bits(numero_binario)
+print(numero_8bits)  # Output: 00000101
+
+#18
+cadena_original = "HoLa"
+cadena_invertida = invertir_mayusculas_minusculas(cadena_original)
+print(cadena_invertida)  # Output: "hOlA"
+
+#19
+cadena = "1234 Hola Mundo"
+cantidad_digitos = contar_digitos(cadena)
+print("La cantidad de dígitos en la cadena es:", cantidad_digitos)
+
+#20
+emails = ["juan@gmail.com", "maria@hotmail.com"]
+resultado = unir_emails(emails)
+print(resultado)
+# Output: juan@gmail.com;maria@hotmail.com
+
+#21 
+
+texto_ejemplo = "Esta es una frase de ejemplo, y otra frase de ejemplo"
+resultado = cuenta_palabras(texto_ejemplo)
+print(resultado)
