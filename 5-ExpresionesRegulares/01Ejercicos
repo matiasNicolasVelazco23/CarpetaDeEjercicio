@@ -1,0 +1,176 @@
+#1-7 search true o false evaluando match o none
+
+# 1.Crear una función llamada es_mayuscula que reciba un string y devuelva True 
+# en caso de que todas las letras sean mayúsculas o False en el caso contrario
+
+import re
+#Uso de [] y findall
+def es_mayuscula(string):
+    # utilizar findall para buscar letras minúsculas
+    letras_min = re.findall(r"[a-z]", string)
+    #una lista vacía se considera falsa, mientras que una lista con elementos se considera verdadera, si es HOLAAa la lista contendrá [a]
+    # , será veradera entonces el ejercicio dará false
+    #el findall devuelve una lista, si en letras min hay una, entonces if es true, y devuelvo false(porque hay una minúscula)
+    if letras_min:
+        return False
+    else:
+        return True
+    
+print("------------------")
+texto1= es_mayuscula("HOLAA")
+print(texto1)
+
+# 2.Crear una función llamada es_minuscula que reciba un string y devuelva True
+# en caso de que todas las letras sean mayúsculas o False en el caso contrario
+
+#uso de [] y findall
+def es_minuscula(string):
+    # utilizar findall para buscar letras mayúsculas
+    letras_may = re.findall(r"[A-Z]", string)
+    
+    if letras_may:
+        return False
+    else:
+        return True
+    
+print("------------------")
+texto2= es_minuscula("holaa")
+print(texto2)
+
+
+# 3.Crear una función llamada es_entero que reciba un string y devuelva True en caso
+# de que se trate de un número entero y False en caso contrario.
+def es_entero(string):
+    # Utilizamos la función re.search() para buscar una coincidencia
+    # que contenga únicamente dígitos del 0 al 9
+    if re.search(r"^[0-9]+$", string):  #acá digo que empieza y termina con número y hay uno o más números
+        # Si se encuentra una coincidencia, el string es un número entero válido
+        # y se devuelve True
+        return True
+    else:
+        # Si no se encuentra una coincidencia, el string no es un número entero válido
+        # y se devuelve False
+        return False
+    
+print("------------------")
+numero= es_entero("9121")
+print(numero)
+# 4.Crear una función llamada es_solo_texto que reciba un string y devuelva True
+#  en caso de que trate solo de caracteres alfabéticos y el espacio y False
+#  en el caso contrario
+
+def es_solo_texto(string):
+    # Utilizamos la función re.search() para buscar una coincidencia
+    # que contenga únicamente letras mayúsculas y minúsculas y espacios
+    if re.search(r"^[a-zA-Z]+$", string):
+        # Si se encuentra una coincidencia, el string contiene solo caracteres alfabéticos y espacios
+        # y se devuelve True
+        return True
+    else:
+        # Si no se encuentra una coincidencia, el string contiene caracteres no permitidos
+        # y se devuelve False
+        return False
+
+print("------------------")
+texto3= es_solo_texto("Papanata")
+print(numero)
+
+
+# 5.Crear una función llamada es_decimal que reciba dos strings: el primero representa
+# la expresión a evaluar y el segundo el separador decimal (puede ser punto . o coma ,).
+# Debe devolver True en caso que se trate de un número decimal y False en el caso contrario.
+# La expresión regular r"^[0-9]+[" + separador + r"]?[0-9]*$" está compuesta por los siguientes elementos:
+
+
+def es_decimal(expresion, separador):
+    # Utilizamos la función re.search() para buscar una coincidencia que
+    # contenga dígitos y el separador decimal en la expresión
+    if re.search(r"^[0-9]+[{0}][0-9]*$".format(separador), expresion): #defino el separador, digo que inicia y termina con número y que puede ser cualquier cantidad de números
+        # Si se encuentra una coincidencia, la expresión es un número decimal válido
+        # y se devuelve True
+        return True
+    else:
+        # Si no se encuentra una coincidencia, la expresión no es un número decimal válido
+        # y se devuelve False
+        return False
+
+print("------------------")
+decimal= es_decimal("3.14", ".")
+print(decimal)
+
+
+# 6.Crear una función llamada es_alfanumerico que devuelva True en caso de tratarse
+# de solo letras y números y False en el caso contrario (es decir que contenga caracteres especiales) 
+def es_alfanumerico(string):
+    # Utilizamos la función re.search() para buscar una coincidencia
+    # que contenga caracteres que no sean alfanuméricos
+    if re.search(r"[^a-zA-Z0-9]", string): #niego todo lo que no sea alfanumérico, todo lo que no sea a-zA-Z0-9
+        # Si se encuentra una coincidencia, el string no es alfanumérico
+        # y se devuelve False
+        return False
+    else:
+        # Si no se encuentra una coincidencia, el string es alfanumérico
+        # y se devuelve True
+        return True
+    
+print("------------------")
+decimal1= es_alfanumerico("3232131")
+print(decimal1)
+# 7.Crear una función llamada es_binario que devuelva True en caso de un número binario
+# válido (solo ceros y unos) o False en el caso contrario
+def es_binario(cadena):
+    # Buscamos si la cadena contiene algún carácter que no sea 0 o 1
+    if re.search(r"[^01]", cadena): #si no contiene contiene 0 o 1 entonces no es binario
+        return False
+    else:
+        return True
+
+# 8.Crear una función que reciba una lista de palabras y devuelva otra lista con las palabras  que comienzan con la letra ‘U’ 
+def palabras_con_u(lista_palabras):
+    palabras_con_u = []
+    for palabra in lista_palabras:
+        if re.search(r'^U', palabra):
+            palabras_con_u.append(palabra)
+    return palabras_con_u
+
+print("------------------")
+
+lista_de_palabras = ["Perru", "Malo", "Ugarte", "uva"]
+resultado= palabras_con_u(lista_de_palabras)
+print(resultado)
+
+# 9.Crear una función que reciba un texto y devuelva una lista con las palabras que 
+# contienen entre 3 y 6 caracteres de largo
+
+def palabras_de_3_a_6_caracteres(texto):
+
+    return re.findall(r'\b[a-zA-Z]{3,6}\b', texto) # uso findall pq tiene que devolver una lista de palabras 
+
+print("------------------")
+
+texto_largo= "   hola Juan todo bien qué haces juancito 9912191 ##;!!!,,'  "
+
+resultado1= palabras_de_3_a_6_caracteres(texto_largo)
+
+print(resultado1)
+# 10Crear una función que reciba un texto y devuelva una lista de todas las palabras 
+# que terminan con ‘ción’.
+def palabras_con_cion(texto):
+    palabras = re.findall(r'\b[a-zA-Z]+ción\b', texto)
+    return palabras
+print("------")
+textocion= "ción ,ción canción, oración"
+resultado=palabras_con_cion(textocion)
+print(resultado)
+
+#Crear una función que reciba un texto y devuelva una la lista de palabras encuentra 
+# que comienzan con una vocal
+def palabras_con_vocal_inicial(texto):
+    patron = r'\b[aeiouAEIOU][a-zA-Z]*\b'
+    palabras = re.findall(patron, texto)
+    return palabras
+
+print("------")
+texto_vocales_inicio = "hola este es un texto de Urueba dkasdjsada2313lkfsas.sa"
+resultado3= palabras_con_vocal_inicial(texto_vocales_inicio)
+print(resultado3)

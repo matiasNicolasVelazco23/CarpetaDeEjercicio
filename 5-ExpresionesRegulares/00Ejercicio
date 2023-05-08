@@ -1,0 +1,18 @@
+import re
+texto = 'uno 1 dos 2 tres 3 cuatro'
+print (re.split(' ', texto))
+#['uno', '1', 'dos', '2', 'tres', '3', 'cuatro']
+print (re.split(r'[0-9]+', texto))
+#['uno ',' dos ', ' tres , ' cuatro']
+print (re.split(r'[a-z ]+', texto))
+#['', '1', '2', '3', '']
+
+texto = 'QUEVEDO || BZRP Music Sessions #52'
+print (re.split(r'[\]]{2}|[#]{1}', texto))
+
+
+fecha= "2022-07-06 00:00:00"
+print (re.split('[\- :]{1}', fecha))
+
+print (re.split(r'[\\]+', fecha))
+print (re.findall(r"[a-zA-Z ]{2,}[|]{2}[a-zA-Z ]{2,}#[0-9]{1,}", texto))

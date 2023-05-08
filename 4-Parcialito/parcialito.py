@@ -160,9 +160,10 @@ def invertir_mayusculas_minusculas(cadena):
 def contar_digitos(cadena):
     contador = 0  # Inicializamos el contador de dígitos en 0
     for caracter in cadena:  # Iteramos por cada caracter de la cadena
-        if caracter.isdigit():  # Si el caracter es un dígito
+        if caracter.isdigit():  # Si el caracter es un dígito                                                                                                                                    
             contador += 1  # Aumentamos el contador en 1
     return contador  # Devolvemos el contador de dígitos encontrados
+                                                                                                                                                                                              
 
 
 #20 Escribir una función que tome una lista de direcciones de correo electrónico y las una 
