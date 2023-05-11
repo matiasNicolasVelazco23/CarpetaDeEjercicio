@@ -16,3 +16,6 @@ print (re.split('[\- :]{1}', fecha))
 
 print (re.split(r'[\\]+', fecha))
 print (re.findall(r"[a-zA-Z ]{2,}[|]{2}[a-zA-Z ]{2,}#[0-9]{1,}", texto))
+
+
+# https://regex101.com/ página para testear las expresiones

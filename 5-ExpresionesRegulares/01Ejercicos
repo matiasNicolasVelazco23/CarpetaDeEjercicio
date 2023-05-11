@@ -1,4 +1,5 @@
 #1-7 search true o false evaluando match o none
+#8-12 findall listas
 
 # 1.Crear una función llamada es_mayuscula que reciba un string y devuelva True 
 # en caso de que todas las letras sean mayúsculas o False en el caso contrario
