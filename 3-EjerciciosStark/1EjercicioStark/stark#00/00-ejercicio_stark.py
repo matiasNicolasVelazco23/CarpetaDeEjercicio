@@ -110,7 +110,7 @@ while True:
     elif opcion == "3":
         mostrar_miembro_mas_alto()
 
-    # Opción 4: Buscar información de un miembro
+
     elif opcion == "4":
         mostrar_miembro_mas_bajo()
 

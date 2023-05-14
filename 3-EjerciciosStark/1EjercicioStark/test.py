@@ -1,19 +1,12 @@
-from data_stark import lista_personajes
+import re
 
+def obtener_oraciones(texto):
+    patron = r'[^.!?]+[.!?]'
+    oraciones = re.findall(patron, texto)
+    for i in range(len(oraciones)):
+        oraciones[i] = oraciones[i].strip()
+    return oraciones
+texto = "¿Bello es mejor que feo? Explícito es mejor que implícito. Simple es mejor que complejo. Complejo es mejor que complicado. Plano es mejor que anidado. Espaciado es mejor que denso. La legibilidad es importante. Los casos especiales no son lo suficientemente especiales como para romper las reglas. Sin embargo la practicidad le gana a la pureza. Los errores nunca deberían pasar silenciosamente. A menos que se silencien explícitamente. Frente a la ambigüedad, evitar la tentación de adivinar. Debería haber una, y preferiblemente solo una, manera obvia de hacerlo. A pesar de que eso no sea obvio al principio a menos que seas Holandés. Ahora es mejor que nunca. A pesar de que nunca es muchas veces mejor que *ahora* mismo. Si la implementación es difícil de explicar, es una mala idea. Si la implementación es fácil de explicar, puede que sea una buena idea. Los espacios de nombres son una gran idea, ¡tengamos más de esos!"
 
-def encontrar_superheroe_por_genero_altx_bajx(lista, clave:str, valor:str, modo):
-    superheroe_alto_o_bajo = lista[0]
-    for personaje in lista:
-        if personaje[clave] == valor:
-            if modo == "máximo" and float(personaje["altura"]) > float(superheroe_alto_o_bajo["altura"]):
-                superheroe_alto_o_bajo = personaje
-            elif modo == "mínimo" and float(personaje["altura"]) < float(superheroe_alto_o_bajo["altura"]):
-                superheroe_alto_o_bajo = personaje
-    return superheroe_alto_o_bajo
-valor_mas_bajo_m=encontrar_superheroe_por_genero_altx_bajx(lista_personajes,clave="genero", valor="M", modo= "máximo" )
-
-valor_mas_bajo_f=encontrar_superheroe_por_genero_altx_bajx(lista_personajes,clave="genero", valor="F", modo= "mínimo" )
-print(valor_mas_bajo_f)
-
-valor_mas_bajo_Prueba=encontrar_superheroe_por_genero_altx_bajx(lista_personajes,clave="genero", valor="Prueba", modo= "mínimo" )
-print(valor_mas_bajo_Prueba)
+resultado= obtener_oraciones(texto)
+print(resultado)
