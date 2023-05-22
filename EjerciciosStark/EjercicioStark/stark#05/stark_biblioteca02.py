@@ -59,8 +59,7 @@ def obtener_nombre_y_dato(heroe, key):
 def stark_imprimir_nombres_alturas(lista):
     if len(lista) == 0:
         return -1
-    #O   if not lista:
-    #    return -1
+
     for heroe in lista:
         print(obtener_nombre_y_dato(heroe, 'altura'))
 
@@ -160,6 +159,7 @@ def stark_menu_principal():
 
 
 def stark_marvel_app(lista_personajes):
+    stark_normalizar_datos(lista_personajes)
     while True:
         opcion = stark_menu_principal()
 
@@ -170,24 +170,20 @@ def stark_marvel_app(lista_personajes):
             stark_imprimir_nombres_alturas(lista_personajes)
 
         elif opcion == 3:
-            stark_normalizar_datos(lista_personajes)
             calcular_max(lista_personajes, "altura")
 
         elif opcion == 4:
-            stark_normalizar_datos(lista_personajes)
             calcular_min(lista_personajes, "altura")
 
         elif opcion == 5:
-            stark_normalizar_datos(lista_personajes)
             stark_calcular_imprimir_promedio_altura(lista_personajes)
 
         elif opcion == 6:
-            stark_normalizar_datos(lista_personajes)
             stark_calcular_imprimir_heroe(lista_personajes, "máximo", "altura")
             stark_calcular_imprimir_heroe(lista_personajes, "mínimo", "altura")
 
         elif opcion == 7:
-            stark_normalizar_datos(lista_personajes)
+
             stark_calcular_imprimir_heroe(lista_personajes, "máximo", "peso")
             stark_calcular_imprimir_heroe(lista_personajes, "mínimo", "peso")
 

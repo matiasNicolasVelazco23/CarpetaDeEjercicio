@@ -140,6 +140,8 @@ lista_de_palabras = ["Perru", "Malo", "Ugarte", "uva"]
 resultado= palabras_con_u(lista_de_palabras)
 print(resultado)
 
+#-------------------------------------------------------------------------------
+
 # 9.Crear una función que reciba un texto y devuelva una lista con las palabras que 
 # contienen entre 3 y 6 caracteres de largo
 
@@ -164,7 +166,7 @@ textocion= "ción ,ción canción, oración"
 resultado=palabras_con_cion(textocion)
 print(resultado)
 
-#Crear una función que reciba un texto y devuelva una la lista de palabras encuentra 
+#11Crear una función que reciba un texto y devuelva una la lista de palabras encuentra 
 # que comienzan con una vocal
 def palabras_con_vocal_inicial(texto):
     patron = r'\b[aeiouAEIOU][a-zA-Z]*\b'
@@ -172,6 +174,200 @@ def palabras_con_vocal_inicial(texto):
     return palabras
 
 print("------")
-texto_vocales_inicio = "hola este es un texto de Urueba dkasdjsada2313lkfsas.sa"
+texto_vocales_inicio = "hola este es un texto de Un ejemplo"
 resultado3= palabras_con_vocal_inicial(texto_vocales_inicio)
 print(resultado3)
+
+#12 Crear una función llamada obtener_oraciones que reciba como parámetro un 
+# string y que devuelva una lista con las oraciones (delimitadores, ‘.’, ‘!’, ‘?’). 
+
+def obtener_oraciones(texto):
+    patron = r'[^.!?]+[.!?]'
+    oraciones = re.findall(patron, texto)
+    for i in range(len(oraciones)):
+        oraciones[i] = oraciones[i].strip()
+    return oraciones
+
+# ------------------------------------------------------------------
+#13 
+# Crear una función que reciba un texto como parámetro y que corrija los errores de ortografía que no cumplan con la regla ortográfica que indica que antes de V se escribe N y que antes de B se escribe M. 
+# Por ejemplo, si el texto es: "Mi comvicción me hace sentir que es el momento de imvertir tiempo para finalmente enbarcar en esta nueva aventura." La función debería devolver:
+# “Mi convicción me hace sentir que es el momento de invertir tiempo para finalmente embarcar en esta nueva aventura."
+
+def corrector(input_text: str) -> str:
+    words = {
+        "mv": "nv",
+        "nb": "mb"
+    }
+    
+    for bad_word, good_word in words.items():
+        input_text = re.sub(bad_word, good_word, input_text)
+  
+    return input_text
+
+text = "Mi comvicción me hace sentir que es el momento de imvertir tiempo para finalmente enbarcar en esta nueva aventura."
+good_text = corrector(text)
+
+print(good_text)
+
+# 14 Crear la función es_fecha que reciba dos string, el primero representa la expresión a evaluar y el segundo el separador de la fecha (puede ser la barra / o el guión -) y que devuelva True en caso de tratarse de una fecha válida y False en el caso contrario. Los formatos admitidos son: ‘dd/mm/aaaa’ o ‘dd-mm-aaaa’
+def es_fecha(fecha, separador):
+    # Verificar el formato de la fecha usando una expresión regular
+    if separador == '/':
+        formato_regex = r'(0[1-9]|1[0-9]|2[0-9]|3[0-1])/(0[1-9]|1[0-2])/\d{4}'
+    elif separador == '-':
+        formato_regex = r'(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-\d{4}'
+    else:
+        return False
+
+    if not re.search(formato_regex, fecha):
+        return False
+
+    # Obtener los componentes de la fecha
+    partes = fecha.split(separador)
+    dia = partes[0]
+    mes = partes[1]
+    anio = partes[2]
+    
+    # Verificar el rango de los días según el mes
+    dia = int(dia)
+    mes = int(mes)
+    if dia < 1 or dia > 31:
+        return False
+
+    if dia > 30 and (mes == 4 or mes == 6 or mes == 9 or mes == 11):
+        return False
+
+    if mes == 2:
+        if es_bisiesto(int(anio)) and dia > 29:
+            return False
+        if not es_bisiesto(int(anio)) and dia > 28:
+            return False
+
+    # La fecha es válida
+    return True
+
+def es_bisiesto(anio):
+    if (anio % 4 == 0 and anio % 100 != 0) or anio % 400 == 0:
+        return True
+    else:
+        return False
+    
+fecha = "09/12/2021"
+
+separador= "/"
+resultado= es_fecha(fecha,separador)
+print(resultado)
+
+#----------------------------------------------------------------------
+# 15-Crear la función es_hora que reciba un string y que devuelva True en caso de
+# tratarse de una hora válida y False en el caso contrario. El formato admitido es
+# ‘hh:mm:ss’
+def es_hora(hora):
+    formato_regex = r'^([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$'
+    
+    if not re.match(formato_regex, hora):
+        return False
+
+    # Obtener los componentes de la hora
+    partes = hora.split(':')
+    horas = int(partes[0])
+    minutos = int(partes[1])
+    segundos = int(partes[2])
+
+    # Verificar los límites de las horas, minutos y segundos
+    if horas > 23 or minutos > 59 or segundos > 59:
+        return False
+
+    # La hora es válida
+    return True
+
+#16Crear la función validar_codigo_postal que reciba un string como parámetro y devuelva True en caso de tratarse de código postal válido o False en caso contrario. 
+#formato una letra, 4 números, 3 letras
+def validar_codigo_postal(codigo_postal):
+    formato_regex = r'^[A-Za-z]\d{4}[A-Za-z]{3}$'
+
+    if not re.match(formato_regex, codigo_postal):
+        return False
+
+    # El código postal es válido
+    return True
+
+#17Crear la función validar_patente que reciba un string como parámetro y 
+# devuelva True en caso de tratarse de un número de patente válido o False 
+# en caso contrario.  Debe poder admitir estos dos tipos:
+
+def validar_patente(patente):
+    formato_regex1 = r'[A-Za-z]{2} \d{3} [A-Za-z]{2}'
+    formato_regex2 = r'[A-Za-z]{3} \d{3}'
+
+    if re.search(formato_regex1, patente) or re.search(formato_regex2, patente):
+        return True
+
+    # La patente no es válida
+    return False
+
+#18 Crear una función llamada validar_ip que reciba un string como parámetro y verifique si se trata de una dirección IP v4 válida, en caso de serlo retornar True de lo contrario retornar False. 
+# Se considera una dirección IP válida si tiene el formato xxx.xxx.xxx.xxx, donde xxx es un número entero entre 0 y 255.
+def obtener_direcciones_email(texto):
+    patron = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b'
+    direcciones_email = re.findall(patron, texto)
+    return direcciones_email
+
+#19Crear una función llamada validar_password que reciba un string y verifique si se trata de una contraseña cumple con los requisitos mínimos de seguridad:
+
+
+# Al menos 8 caracteres
+# Al menos una letra mayúscula y una letra minúscula
+# Un número 
+# Un carácter especial
+	
+# En caso de no cumplir con alguno de los requisitos, imprimir un mensaje informando cual no se cumplio
+
+
+def validar_password(password):
+    # Verificar longitud mínima
+    if len(password) < 8:
+        print("La contraseña debe tener al menos 8 caracteres")
+        return False
+
+    # Verificar letra mayúscula y minúscula
+    if not re.search(r'[A-Z]', password):
+        print("La contraseña debe contener al menos una letra mayúscula")
+        return False
+    if not re.search(r'[a-z]', password):
+        print("La contraseña debe contener al menos una letra minúscula")
+        return False
+
+    # Verificar número
+    if not re.search(r'\d', password):
+        print("La contraseña debe contener al menos un número")
+        return False
+
+    # Verificar carácter especial
+    if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+        print("La contraseña debe contener al menos un carácter especial")
+        return False
+
+    return True
+
+#20 Crear una función llamada validar_ip que reciba un string como parámetro y verifique si se trata de una dirección IP v4 válida, en caso de serlo retornar True de lo contrario retornar False. 
+#Se considera una dirección IP válida si tiene el formato xxx.xxx.xxx.xxx, donde xxx es un número entero entre 0 y 255.
+
+def validar_ip(ip):
+    # Dividir la dirección IP en partes separadas por puntos
+    partes = ip.split(".")
+
+    # Verificar si la dirección IP tiene el formato correcto y contiene 4 partes
+    if len(partes) != 4:
+        return False
+
+    # Verificar que cada parte sea un número entero entre 0 y 255
+    for parte in partes:
+        if not parte.isdigit():
+            return False
+        num = int(parte)
+        if num < 0 or num > 255:
+            return False
+
+    return True

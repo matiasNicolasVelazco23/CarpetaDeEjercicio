@@ -1,0 +1,43 @@
+import random  # Importa el módulo random para generar números aleatorios
+import time  # Importa el módulo time para medir el tiempo de ejecución
+
+def ivan_sort_A(lista:list):
+    rango_a = len(lista)  # Obtiene la longitud de la lista y la asigna a la variable rango_a
+    flag_swap = True  # Variable booleana para controlar si se realizan intercambios en la lista
+
+    while(flag_swap):  # Bucle que se ejecuta mientras flag_swap sea True
+        flag_swap = False  # Reinicia flag_swap a False antes de cada iteración
+        rango_a = rango_a - 1  # Reduce el rango de comparación en 1 en cada iteración
+
+        for indice_A in range(rango_a):  # Bucle que itera desde 0 hasta rango_a-1
+            if lista[indice_A] < lista[indice_A+1]:  # Compara el elemento actual con el siguiente
+                lista[indice_A], lista[indice_A+1] = lista[indice_A+1], lista[indice_A]  # Intercambia los elementos
+                flag_swap = True  # Establece flag_swap en True para indicar que se realizó un intercambio
+
+def ivan_sort_B(lista:list, flag_orden:bool):
+    rango_a = len(lista) - 1  # Obtiene el rango de comparación
+    flag_swap = True  # Variable booleana para controlar si se realizan intercambios en la lista
+
+    while(flag_swap):  # Bucle que se ejecuta mientras flag_swap sea True
+        flag_swap = False  # Reinicia flag_swap a False antes de cada iteración
+
+        for indice_A in range(rango_a):  # Bucle que itera desde 0 hasta rango_a-1
+            if flag_orden == False and lista[indice_A] < lista[indice_A+1] \
+            or flag_orden == True and lista[indice_A] > lista[indice_A+1]:
+                # Compara los elementos según el valor de flag_orden
+                lista[indice_A], lista[indice_A+1] = lista[indice_A+1], lista[indice_A]  # Intercambia los elementos
+                flag_swap = True  # Establece flag_swap en True para indicar que se realizó un intercambio
+
+lista = list(range(10000))  # Crea una lista con elementos del 0 al 9999
+random.shuffle(lista)  # Mezcla aleatoriamente los elementos de la lista
+
+lista_A = lista[:]  # Crea una copia de la lista original
+lista_B = lista[:]  # Crea otra copia de la lista original
+lista_C = lista[:]  # Crea otra copia de la lista original
+
+inicio = time.time()  # Obtiene el tiempo actual en segundos
+ivan_sort_A(lista_A)  # Llama a la función ivan_sort_A para ordenar la lista
+
+print("IVAN_A {0}".format((fin-inicio)))  # Imprime el tiempo de ejecución de ivan_sort_A
+
+ivan_sort_B(lista_B, True)  # Llama a la función ivan_sort_B para ordenar la lista en orden descendente
